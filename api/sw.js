@@ -28,7 +28,7 @@ router.get("/sw/clues", function (req, res, next) {
     store.load("text/turtle", rdf, function(err, results) {
       const mainNode = req.query.node;
       store.execute(
-        'SELECT ?s ?p ?o WHERE { <'+ mainNode +'> ?p ?o . }',
+        'SELECT ?p ?o WHERE { <'+ mainNode +'> ?p ?o . }',
         function (success, results) {
           res.json({results: results, length: results.length});
         }
