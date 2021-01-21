@@ -28,7 +28,7 @@ router.get("/sw/clues", function (req, res, next) {
     store.load("text/turtle", rdf, function(err, results) {
       const mainNode = req.query.node;
       store.execute(
-        'SELECT ?s ?p ?o WHERE { ?s ?p ?o . FILTER (?s = <'+ mainNode +'>) }',
+        'SELECT ?s ?p ?o WHERE { <'+ mainNode +'> ?p ?o . }',
         function (success, results) {
           res.json({results: results, length: results.length});
         }
@@ -43,7 +43,7 @@ router.get("/sw/name", function (req, res, next) {
     store.load("text/turtle", rdf, function(err, results) {
       const mainNode = req.query.node;
       store.execute(
-        'SELECT ?name WHERE { ?s <neo4j://vocabulary#name> ?name . FILTER (?s = <'+ mainNode +'>) }',
+        'SELECT ?name WHERE { <'+ mainNode +'> <neo4j://vocabulary#name> ?name . }',
         function (success, results) {
           res.json({results: results, length: results.length});
         }
